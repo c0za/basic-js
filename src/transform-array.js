@@ -22,13 +22,34 @@ function transform(arr) {
 
   for (let i = 0; i < arr.length; i++) {
     if (arr[i] === '--discard-next') {
-      i +=1;
+      if (i < arr.length - 1) {
+        i += 2;
+      }
       continue;
-    } else result.push(arr[i]);
+    }
 
     if (arr[i] === '--double-next') {
-      result.push(arr[i + 1]);
-    } else result.push(arr[i]);
+      if (i < arr.length - 1) {
+        result.push(arr[i + 1]);
+      }
+      continue;
+    }
+
+    if (arr[i] === '--discard-prev') {
+      if (i > 0) {
+        result.pop();
+      }
+      continue;
+    }
+
+    if (arr[i] === '--double-prev') {
+      if (i > 0) {
+        result.push(arr[i - 1]);
+      }
+      continue;
+    }
+
+    result.push(arr[i]);
   }
 
   return result;
